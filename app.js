@@ -37,8 +37,13 @@ app.use(helmet());
 app.use(cors());
 app.use(xss());
 // routes
+app.get('/',(req,res)=>{
+  res.send('jobs api ')
+})
 app.use('/api/v1/auth',autRouter)
 app.use('/api/v1/jobs',authenticateUser ,jobsRouter)
+
+
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
