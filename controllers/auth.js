@@ -13,7 +13,7 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const { email,password } = req.body;
+  const { email, password } = req.body;
   if (!password || !email) {
     throw new BadRequestError("please give email and password ");
   }
@@ -21,6 +21,11 @@ const login = async (req, res) => {
   if (!user) {
     throw new UnauthenticatedError("please provide a valid email ");
   }
+  const isPasswordCorrect = await user.comparePassword(password);
+  if (!isPasswordCorrect) {
+    throw new UnauthenticatedError("please provide a valid password");
+  }
+
   const token = user.createJWT();
   res.status(StatusCodes.OK).json({ user: { name: user.name }, token });
 };
