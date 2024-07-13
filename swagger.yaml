@@ -1,0 +1,240 @@
+openapi: 3.0.0
+info:
+  title: jobs API
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://job-api-5rsg.onrender.com/api/v1
+  variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RegisterUserRequest'
+              - example:
+                  name: vik gayen
+                  email: barnali1476@gamil.com
+                  password: secret
+            example:
+              name: vik gayen
+              email: barnali1476@gamil.com
+              password: secret
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: LOGIN User
+      operationId: LOGINUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LOGINUserRequest'
+              - example:
+                  email: hemant23@gamil.com
+                  password: secret
+            example:
+              email: hemant23@gamil.com
+              password: secret
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /jobs:
+    post:
+      tags:
+      - jobs
+      summary: Create a job
+      operationId: Createajob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateajobRequest'
+              - example:
+                  company: tcs
+                  position: Dev-0ps
+            example:
+              company: tcs
+              position: Dev-0ps
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - jobs
+      summary: Geta All The jobs
+      operationId: GetaAllThejobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The user ID
+    get:
+      tags:
+      - jobs
+      summary: GET a Single Job
+      operationId: GETaSingleJob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - jobs
+      summary: DELETE A JOB
+      operationId: DELETEAJOB
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+
+    patch:
+      tags:
+      - jobs
+      summary: UPDATE A JOB
+      operationId: UPDATEAJOB
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UPDATEAJOBREQUEST'
+              - example:
+                  company: tcs
+                  position: Dev-0ps
+            example:
+              company: tcs
+              position: Dev-0ps
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+components:
+  schemas:
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: vik gayen
+        email: barnali1476@gamil.com
+        password: secret
+    LOGINUserRequest:
+      title: LOGINUserRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: hemant23@gamil.com
+        password: secret
+    CreateajobRequest:
+      title: CreateajobRequest
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: tcs
+        position: Dev-0ps
+    UPDATEAJOBREQUEST:
+      title: UPDATEAJOBREQUEST
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: tcs
+        position: Dev-0ps
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: Auth
+  description: ''
+- name: jobs
+  description: ''
